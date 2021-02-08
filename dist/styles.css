@@ -1,0 +1,134 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    color: rgb(63, 67, 62);
+}
+
+header {
+    background: rgb(48,43,134);
+    background: linear-gradient(90deg, rgba(48,43,134,1) 0%, rgba(36,36,193,1) 50%, rgba(48,43,134,1) 100%);
+    margin: 0;
+    padding: 0;
+    border: none;
+    display: flex;
+    justify-content: center;
+}
+
+h1 {
+    color: rgba(137, 252, 23, 0.743);
+    margin: 0;
+    padding: 2%;
+    justify-self: center;
+    font-size: 4em;
+}
+
+.squ {
+    border: 1.5px solid black;
+}
+
+.selectingBoat {
+    border: 1px solid rgb(231, 79, 41);
+    background-color: rgb(236, 174, 146);
+}
+
+.selectingBoat:hover {
+    border: 1px solid rgb(231, 79, 41);
+    background-color: rgb(236, 174, 146);
+}
+
+.hitSqu {
+    border: 1.5px solid rgb(226, 77, 177);
+    background-color: rgb(240, 203, 228);
+}
+
+.missSqu {
+    border: 1.5px solid rgb(77, 137, 226);
+    background-color: rgb(193, 209, 231);
+}
+
+.personBoat {
+    border: 1px solid rgb(231, 79, 41);
+    background-color: rgb(236, 174, 146);
+}
+
+#personBoard, #aiBoard  {
+    display: grid;
+    grid-template-columns: repeat(10, 35px);
+    grid-template-rows: repeat(10, 35px);
+    gap: 0;
+}
+
+#gameContainer{
+    display: flex;
+}
+
+#messageBoardContainer{
+    width: 15%;
+    display:flex;
+    flex-direction: column;
+    align-content: center;
+    padding: 2em 0 2em 4em;
+}
+
+.messagesScoresLabel{
+    font-size: 1em;
+}
+
+#messageBoard{
+    padding: 0.5em;
+    font-weight: 200;
+    font-weight: bold;
+    color: rgb(63, 67, 62);
+    background-color:  rgb(63, 67, 62);
+    color: rgba(137, 252, 23, 0.743);
+}
+
+#boardsContainer {
+    display: flex;
+    margin: auto;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.playerContainer {
+    padding: 0 6em 0 0;
+}
+
+#dirButtonContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0%;
+    padding: 0.5em 0 0 0;
+}
+
+#dirButton{
+    background: white;
+    font-family: 'Courier New', Courier, monospace;
+    color: rgb(63, 67, 62);
+    font-weight: bold;
+    background-color: rgba(198, 245, 151, 0.743);
+    border: 1px solid;
+    width: 8em;
+    height: 2em;
+}
+
+.scores{
+    padding: 0.5em 0 0 0;
+    font-weight: 200;
+    font-weight: bold;
+    color: rgb(63, 67, 62);
+}
+
+#userSunkDiv, #aiSunkDiv {
+    color: rgba(137, 252, 23, 0.743);
+    padding: 0.5em;
+    font-weight: 200;
+    font-weight: bold;
+    background-color:  rgb(63, 67, 62);
+    width: fit-content;
+
+}
+
