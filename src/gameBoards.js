@@ -1,14 +1,14 @@
 // *** MANAGES GAMEBOARDS & FUNCTIONS OWNED BY THEM, INCLUDING RECEIVING ATTACKS *** //
 import { colourSqu } from "./visuals";
-import { removeListeners, aiBoard, personBoard } from "./gameplay";
-import { updateMessage, updateScoreBoard } from './msgsAndScores';
+import { removeListeners, aiBoard, userBoard } from "./gameplay";
+import { updateMessage, updateScoreBoard, messageNoLoader } from './msgsAndScores';
 
 //in order to display messages in test mode. this feels clunky. amend in next iteration
 function getOtherBoard(board){
     let otherBoard;
-    if(board === personBoard || board === aiBoard){
-        otherBoard = (board === personBoard) ? aiBoard : personBoard;
-    } else if (board !== personBoard && board !== aiBoard){
+    if(board === userBoard || board === aiBoard){
+        otherBoard = (board === userBoard) ? aiBoard : userBoard;
+    } else if (board !== userBoard && board !== aiBoard){
         otherBoard = {
             name: 'other player'
         }
@@ -26,8 +26,8 @@ function areAllSunk(board){
         if (board[ship].sunk === true) {
             sunkShips++;
                 if(sunkShips === arr.length) {
-                    updateMessage('Game Over!! ' + otherBoard.name + ' wins!!');
                     removeListeners('ai');
+                    updateMessage('Game Over!! ' + otherBoard.name + ' wins!!');
                     return true;
                 }
         } else return false;
@@ -38,7 +38,7 @@ function areAllSunk(board){
 function amISunk(board, ship){
     if(ship.hitLocation === ship.length){
         ship.sunk = true;
-        board.shipsSunk++
+        board.shipsSunk++;
     };
     return ship.sunk;
 };
@@ -51,15 +51,15 @@ const createGameBoard = (name) => {
             if (!board[coord]) {
                 board[coord] = 'miss';
                 colourSqu('miss', board, coord);
-                updateMessage(otherBoard.name + ' miss');
+                messageNoLoader(otherBoard.name + ' miss');
             } else if (board[coord] === 'miss') {
-                updateMessage('invalid move');
+                messageNoLoader('invalid move');
                 return 'invalid move';
             } else if (board[coord].hitCoords[coord] === true) {
-                updateMessage('invalid move');
+                messageNoLoader('invalid move');
                 return 'invalid move';
             } else if (board[coord] !== false) {
-                updateMessage(otherBoard.name + ' hit! o_o');
+                messageNoLoader(otherBoard.name + ' hit! o_o');
                 board[board[coord].master].hitLocation++;
                 board[coord].hitCoords[coord] = true;
                 colourSqu('hit', board, coord);

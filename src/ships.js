@@ -1,6 +1,6 @@
 import { setId, colourSqu } from "./visuals";
-import { aiBoard, personBoard, removeListeners, addListeners, getRandCoord } from "./gameplay";
-import { updateMessage, createScoreBoard } from './msgsAndScores';
+import { aiBoard, userBoard, removeListeners, addListeners, getRandCoord } from "./gameplay";
+import { updateMessage, messageNoLoader } from './msgsAndScores';
 import { placementVisual, addHover, removeHover } from './visuals';
 
 // *** MANAGES CREATING AND PLACING SHIPS *** //
@@ -108,7 +108,7 @@ function placeShip(gameboard, coordinate, direction){
                 let a = x + i;
                 let coordChild = a.toString() + "." + y.toString();
                 gameboard[coordChild] = gameboard[coord];
-                if (gameboard === personBoard) {
+                if (gameboard === userBoard) {
                     colourSqu('place', gameboard, coordChild)
                 }
             }
@@ -117,15 +117,15 @@ function placeShip(gameboard, coordinate, direction){
                 let b = y + i;
                 let coordChild = x.toString() + "." + b.toString();
                 gameboard[coordChild] = gameboard[coordinate];
-                if (gameboard === personBoard) {
+                if (gameboard === userBoard) {
                     colourSqu('place', gameboard, coordChild)
                 }
             }
         }
         gameboard.shipsToPlace--;
     } else if (legal === false){
-        if(gameboard === personBoard){
-            updateMessage("Invalid move! Not enough space to place ship.");
+        if(gameboard === userBoard){
+            messageNoLoader("Invalid move! Not enough space to place ship.");
         }
         return false;
     }
@@ -159,26 +159,25 @@ function makeDirButton(){
 
 //MSG: Click to start placing boats
 function userPlace(){
-    if(!personBoard.shipsToPlace && personBoard.shipsPlaced === false){
-        personBoard.shipsToPlace = 5;
+    if(!userBoard.shipsToPlace && userBoard.shipsPlaced === false){
+        userBoard.shipsToPlace = 5;
         makeDirButton();
         addHover();
         return;
-    } else if(personBoard.shipsToPlace <= 5 && personBoard.shipsToPlace > 0){
+    } else if(userBoard.shipsToPlace <= 5 && userBoard.shipsToPlace > 0){
         let arr = event.target.id.split("-");
         let coord = arr[1];
-        placeShip(personBoard, coord, userDirection);
-        if(personBoard.shipsToPlace === 0) {
-            personBoard.shipsPlaced = true;
+        placeShip(userBoard, coord, userDirection);
+        if(userBoard.shipsToPlace === 0) {
+            userBoard.shipsPlaced = true;
             removeHover();
-            removeListeners('person');
+            removeListeners('user');
             aiPlaceShips();
-            setTimeout(updateMessage("That's great! AI has placed their ships. Click on their board to take your shot!"), 1000);
+            setTimeout(updateMessage("...AI has placed their ships. Click on their board to take your shot..."), 1000);
             //make this more interactive - settimeout, 'AI is placing...'
             addListeners('ai');
             let dirButton = document.getElementById('dirButton');
             dirButton.style.display = 'none';
-            createScoreBoard();
         }
     }
 };

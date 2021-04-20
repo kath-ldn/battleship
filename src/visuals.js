@@ -1,21 +1,21 @@
-import { personBoard } from "./gameplay";
+import { userBoard } from "./gameplay";
 import { returnCoordIntegers, userDirection } from './ships';
 
 // *** MANAGES VISUALS *** //
 //colours squares on hit/miss
 function colourSqu(result, board, coord){
-    let user = (board === personBoard) ? 'person' : 'ai';
+    let user = (board === userBoard) ? 'user' : 'ai';
     let squ = document.getElementById(user + '-' + coord );
     if(result === 'hit'){
-        if(board === personBoard){
+        if(board === userBoard){
             squ.classList.remove('selectingBoat');
-            squ.classList.remove('personBoat');
+            squ.classList.remove('userBoat');
         }
         squ.classList.add('hitSqu');
     } else if (result === 'miss') {
         squ.classList.add('missSqu');
     } else if (result === 'place') {
-        squ.classList.add('personBoat');
+        squ.classList.add('userBoat');
     }
 };
 
@@ -35,9 +35,6 @@ function setId(i){
 //function to visually show gameboard
 function showGameBoard(user){
     const container = document.getElementById(user + 'Container')
-    let label = document.createElement('h2');
-    label.textContent = user + ' board';
-    container.appendChild(label);
     const board = document.createElement('div')
     board.setAttribute('id', user + 'Board')
         for (let i = 1; i < 101; i++) {
@@ -51,15 +48,13 @@ function showGameBoard(user){
 };
 
 function gameVisualSetup(){
-    //storing the person and computer gameboards in variables
+    //storing the user and computer gameboards in variables
     //replace with template.size
-    //show person gameboard
-    showGameBoard('person');
+    //show user gameboard
+    showGameBoard('user');
     //show ai gameboard
     showGameBoard('ai');
-}
-
-
+};
 
 //ensures hover covers relevant squares
 function placementVisual(coordinate, instruction, direction, length){
@@ -71,7 +66,7 @@ function placementVisual(coordinate, instruction, direction, length){
             let a = x + i;
             if(a >= 10 ){ a = 10};
             let coordChild = a.toString() + "." + y.toString();
-            let id = 'person-' + coordChild;
+            let id = 'user-' + coordChild;
             let element = document.getElementById(id);
             if (a <= 10){
                 if (instruction === 'add'){
@@ -84,7 +79,7 @@ function placementVisual(coordinate, instruction, direction, length){
             let b = y + i;
             if(b >= 10 ){ b = 10};
             let coordChild = x.toString() + "." + b.toString();
-            let id = 'person-' + coordChild;
+            let id = 'user-' + coordChild;
             let element = document.getElementById(id);
             if (b <= 10){            
                 if (instruction === 'add'){
@@ -100,7 +95,7 @@ function showPlacement(){
     event.preventDefault;
     let arr = event.target.id.split("-");
     let coord = arr[1];
-    placementVisual(coord, 'add', userDirection, personBoard.shipsToPlace);
+    placementVisual(coord, 'add', userDirection, userBoard.shipsToPlace);
 };
 
 //function to hide placement of ship
@@ -108,14 +103,14 @@ function hidePlacement(){
         event.preventDefault;
         let arr = event.target.id.split("-");
         let coord = arr[1];
-        placementVisual(coord, 'remove', userDirection, personBoard.shipsToPlace);
+        placementVisual(coord, 'remove', userDirection, userBoard.shipsToPlace);
 };
 
 //adds hover event listeenrs
 function addHover(){
     for (let i = 1; i < 101; i++) {
         let id = setId(i);
-        let squ = document.getElementById('person-' + id);
+        let squ = document.getElementById('user-' + id);
         squ.addEventListener("mouseover", showPlacement);
         squ.addEventListener("mouseout", hidePlacement);
     }
@@ -124,7 +119,7 @@ function addHover(){
 function removeHover(){
     for (let i = 1; i < 101; i++) {
         let id = setId(i);
-        let squ = document.getElementById('person-' + id);
+        let squ = document.getElementById('user-' + id);
         squ.removeEventListener("mouseover", showPlacement);
         squ.removeEventListener("mouseout", hidePlacement);
     }

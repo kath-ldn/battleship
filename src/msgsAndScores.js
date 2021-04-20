@@ -1,31 +1,41 @@
-import { aiBoard, personBoard } from "./gameplay";
+import { aiBoard, userBoard } from "./gameplay";
 
 // *** MANAGES DISPLAY OF MESSAGES AND SCORES ***
 let messageBoard = document.getElementById("messageBoard");
+let loaderSm = document.getElementById("loader-small");
+
+function messageSetText(message){
+    loaderSm.classList.add("loaded");
+    setTimeout( () => {
+        messageBoard.textContent = message;
+        loaderSm.classList.add("d-none");
+    }, 500)
+};
 
 function updateMessage(message){
+    messageBoard.textContent = "";
+    loaderSm.classList.remove("loaded");
+    loaderSm.classList.remove("d-none");
+    setTimeout( () => {
+        messageSetText(message)
+    }, 500)
+};
+
+function textNoLoader(message){
     messageBoard.textContent = message;
 }
+
+function messageNoLoader(message){
+    setTimeout( () => {
+        textNoLoader(message)
+    }, 400)
+};
 
 function updateScoreBoard(){
     let userSunkDiv = document.getElementById("userSunkDiv");
     let aiSunkDiv = document.getElementById("aiSunkDiv");
-    userSunkDiv.textContent = personBoard.shipsSunk;
+    userSunkDiv.textContent = userBoard.shipsSunk;
     aiSunkDiv.textContent = aiBoard.shipsSunk;
-
-}
-
-function createScoreBoard(){
-    let scoreBoard = document.getElementById("scoreBoardContainer");
-    let arr = ['userLabel', 'userSunkDiv', 'aiLabel', 'aiSunkDiv'];
-    let content = ['User Ships Sunk', '0', 'Ai Ships Sunk', '0'];
-    for(let i = 0; i < 4; i++){
-        let div = document.createElement('div');
-        div.setAttribute('id', arr[i]);
-        div.classList.add('scores');
-        div.textContent = content[i];
-        scoreBoard.appendChild(div);
-    }
 };
 
-export { updateMessage, createScoreBoard, updateScoreBoard, messageBoard };
+export { updateMessage, updateScoreBoard, messageNoLoader };

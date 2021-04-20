@@ -4,10 +4,12 @@ import { setId } from "./visuals";
 import { userPlace } from './ships';
 import { updateMessage } from './msgsAndScores';
 
+
 // *** MANAGES GAMEPLAY *** //
 //global Board & user variables
-let personBoard;
+let userBoard;
 let aiBoard;
+let introMessage = "Hey user! Click on your board to start placing your ships...";
 
 //function to remove single event listener once user has attacked it
 function removeListener(coord, user){
@@ -24,8 +26,9 @@ function userPlay(event){
     removeListener(coord, 'ai');
     let allSunk = areAllSunk(aiBoard);
     if (allSunk === false){
-        setTimeout(aiPlay, 500);
-        areAllSunk(personBoard);
+        removeListeners("ai");
+        setTimeout(aiPlay, 1500);
+        areAllSunk(userBoard);
     }
 };
 
@@ -37,7 +40,7 @@ function addListeners(user){
             const squ = document.getElementById(user + '-' + id);
             squ.addEventListener("click", userPlay);
         }
-    } else if(user === 'person'){
+    } else if(user === 'user'){
         for (let i = 1; i < 101; i++) {
             let id = setId(i);
             const squ = document.getElementById(user + '-' + id);
@@ -56,7 +59,7 @@ function removeListeners(user){
             const squ = document.getElementById(user + '-' + id);
             squ.removeEventListener("click", userPlay);
         }
-    } else if(user === 'person'){
+    } else if(user === 'user'){
         for (let i = 1; i < 101; i++) {
             let id = setId(i);
             const squ = document.getElementById(user + '-' + id);
@@ -81,27 +84,29 @@ function aiPlay(){
     let coord;
     while(legal === false){
         coord = getRandCoord();
-        if(!personBoard[coord]){
+        if(!userBoard[coord]){
             legal = true;
         }
-        if(personBoard[coord]){
-            if(personBoard[coord] === 'miss'){
+        if(userBoard[coord]){
+            if(userBoard[coord] === 'miss'){
                 legal = false;
-            } else if(!personBoard[coord].hitCoords[coord]){
+            } else if(!userBoard[coord].hitCoords[coord]){
                 legal = true;
             }
         }
     }
-    personBoard.receiveAttack(personBoard, coord);
+    userBoard.receiveAttack(userBoard, coord);
+    addListeners("ai")
 };
 
 //initial function to set up the game
 function setUpGame(){
-    personBoard = createGameBoard('Kath');
+    userBoard = createGameBoard('User');
     aiBoard = createGameBoard('Ai');
     gameVisualSetup();
-    updateMessage("Hey user! Click on your board to start placing your ships.")
-    addListeners('person');
+    addListeners('user');
+    setTimeout( () => {
+        updateMessage(introMessage)}, 2100)
 };
 
 //factory function to create user and keep track of scores
@@ -110,7 +115,7 @@ const createuser = ( name, shipsSunk, shipsRemaining ) => {
 };
 
 //creates users for game
-const person = createuser('user', 0, 5);
+const user = createuser('user', 0, 5);
 const ai = createuser('ai', 0, 5);
 
-export { removeListeners, setUpGame, personBoard, aiBoard, addListeners, getRandCoord }
+export { removeListeners, setUpGame, userBoard, aiBoard, addListeners, getRandCoord }

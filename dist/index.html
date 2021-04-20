@@ -4,25 +4,39 @@
     <meta charset="utf-8" />
     <title>Battleship</title>
     <link rel="stylesheet" href="styles.css" />
-    <link rel="icon" type="image/png" href="/assets/favicon.png"/>
+    <link rel="icon" type="image/png" href="/assets/icon.png"/>
 </head>
 <body>
+    <div id="loaderOverlay">
+        <h2 class="welcome">Welcome to Battleship!</h2>
+        <div id="loader"></div>
+    </div>
     <header>
             <h1>Battleship</h1>
+                <div id="messageBoardContainer">
+                <div id="messageBoard"></div>
+                <div id="loader-small" class="loaded"></div>
+            </div>
     </header>
     <main id="gameContainer">
-        <section id="messageBoardContainer">
-            <h2 class="messagesScoresLabel">Messages</h2>
-            <div id="messageBoard"></div>
-            <div id="dirButtonContainer"></div>
-            <div id="scoreBoardContainer"></div>
-        </section>
+        <div id="dirButtonContainer"></div>
         <section id="boardsContainer">
-            <div id="personContainer" class="playerContainer"></div>
-            <div id="aiContainer" class="playerContainer"></div>
+            <div id="userContainer" class="playerContainer">
+                <h2>User Board</h2>
+                <div class="scores">
+                    Ships Sunk: <span id="userSunkDiv">0</span>
+                </div>
+            </div>
+            <div id="aiContainer" class="playerContainer">
+                <h2>Ai Board</h2>
+                <div class="scores">
+                    Ships Sunk: <span id="aiSunkDiv">0</span>
+                </div>
+            </div>
         </section>
     </main>
     <footer>
+        <p>© Kath Turner, 2021</p>
     </footer>
     <script src="main.js"></script>
 </body>

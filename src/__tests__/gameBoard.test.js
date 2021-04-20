@@ -1,8 +1,5 @@
-import { createGameBoard, amISunk, areAllSunk } from '../gameBoards';
+import { createGameBoard, areAllSunk } from '../gameBoards';
 import { placeShip } from '../ships';
-import { updateMessage } from '../msgsAndScores';
-import { colourSqu } from '../visuals';
-import { removeListeners } from '../gameplay';
 
 jest.mock('../msgsAndScores');
 jest.mock('../visuals');
