@@ -1,4 +1,6 @@
 import { setUpGame } from './gameplay';
+import './reset.css';
+import './style.css'; 
 
 function hideLoader(){
     let loader = document.getElementById("loaderOverlay");
