@@ -5,9 +5,10 @@ import './style.css';
 function hideLoader(){
     let loader = document.getElementById("loaderOverlay");
     loader.classList.add("loaded");
-    setTimeout( () => {
-        loaderSm.classList.add("d-none");
-    }, 2000)
+    let loaderSm = document.getElementById("loader-small")
+    loaderSm.classList.add("d-none");
+    let pageTitle = document.getElementById("page-title");
+    pageTitle.classList.remove('d-none');
 }
 
 (function startGame(){
