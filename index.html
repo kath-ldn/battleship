@@ -7,31 +7,27 @@
     <link rel="icon" type="image/png" href="./icon.png"/>
 </head>
 <body>
+    <!--REMOVE THE DISPLAY NONE TO ACTIVATE LOADER-->
     <div id="loaderOverlay">
         <h2 class="welcome">Welcome to Battleship!</h2>
         <div id="loader"></div>
     </div>
     <header>
-            <h1>Battleship</h1>
-                <div id="messageBoardContainer">
-                <div id="messageBoard"></div>
-                <div id="loader-small" class="loaded"></div>
-            </div>
+        <h1 id="page-title" class="d-none">Battleship</h1>
     </header>
-    <main id="gameContainer">
+    <div id="messageBoardContainer">
+        <div id="messageBoard"></div>
+        <!--REMOVE THE DISPLAY NONE TO ACTIVATE LOADER-->
+        <div id="loader-small" class="loaded d-none"></div>
         <div id="dirButtonContainer"></div>
+    </div>
+    <main id="gameContainer">
         <section id="boardsContainer">
             <div id="userContainer" class="playerContainer">
-                <h2>User Board</h2>
-                <div class="scores">
-                    Ships Sunk: <span id="userSunkDiv">0</span>
-                </div>
+                <h2>User Board <span class="scores">Sunk:</span><span id="userSunkDiv">0</span></h2>
             </div>
             <div id="aiContainer" class="playerContainer">
-                <h2>Ai Board</h2>
-                <div class="scores">
-                    Ships Sunk: <span id="aiSunkDiv">0</span>
-                </div>
+                <h2>Ai Board <span class="scores">Sunk:</span><span id="aiSunkDiv">0</span></h2>
             </div>
         </section>
     </main>
