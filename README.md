@@ -46,7 +46,7 @@ For next version:
 
 ### Known Issues
 
-List things you'd like to improve
+* None - please let me know if you find any.
 
 ## Acknowledgements
 
