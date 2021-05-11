@@ -34,7 +34,7 @@ function aiPlaceShips(){
             let size = aiBoard.shipsToPlace;
             legal = checkIfOccupied(aiBoard, x, y, size, direction);
                 if(legal === true){
-                    placeShip(aiBoard, coord, 'vertical');
+                    placeShip(aiBoard, coord, direction);
                 }
                 if(aiBoard.shipsToPlace === 0) {
                     aiBoard.shipsPlaced = true;
